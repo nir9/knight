@@ -173,13 +173,23 @@ public class knight {
 		
 		
 	}
+	void setlocation(Point location)
+	{
+		this.location = location;
+	}
 	void setLocation(Point location)
 	{
 		
 		this.location = location;
+		//System.out.println("Setting location to: " + location.x + " , " + location.y + "count: "+ counter);
 		_board[location.x][location.y]= counter;
 		
 		counter++;
+		
+	}
+	void setCounter(int counter)
+	{
+		this.counter = counter;
 	}
 	int getCounter()
 	{
@@ -188,6 +198,10 @@ public class knight {
 	int[][] getBoard()
 	{
 		return _board;
+	}
+	void setBoard(int[][] board)
+	{
+		_board = board;
 	}
 	/*
 	boolean checkLocation(Point location)
