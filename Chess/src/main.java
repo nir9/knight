@@ -48,14 +48,7 @@ public class main {
         
         }
         numOfTimes++;
-        if(numOfTimes%1000000 == 0){
-          System.out.println("# of times: "+ numOfTimes);
-        
-          elapsedTime = (System.nanoTime() - startTime);
-          System.out.print("took: ");
-          System.out.print(elapsedTime/1000000000);
-          System.out.println(" seconds");
-          }
+      
     //System.out.println(Knight.getBoard()[3][5]);
         
 
