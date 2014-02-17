@@ -5,7 +5,9 @@ import java.util.Random;
 public class main {
 	static boolean firstTime = true;
 	static int numOfTimes = 0;
-
+	
+	static int dPathsCounter = 0;
+	static Point [] deadPaths = new Point[8];//Saves squares that should not be accessed again
 	
 	static Point [] arrofPoints;
 	static Point boardDim = new Point();
@@ -50,23 +52,31 @@ public class main {
 			
 			arrofPoints = Knight.getLocations();
 		
-		System.out.println("LENG " + arrofPoints.length);
+		//System.out.println("LENG " + arrofPoints.length);
 		while(arrofPoints.length != 0)
 		{
 	
 			randomNum = rnd.nextInt(arrofPoints.length);
 			location.x = arrofPoints[randomNum].x;
 			location.y = arrofPoints[randomNum].y;
+			/*for(int i=0;i<dPathsCounter;i++)
+			{
+				if(location.x == deadPaths[i].x&&location.y == deadPaths[i].y)
+				{
+					continue;//If our new location leads to a known dead end the algorithm will start the while again
+				}
+			}*/
 		//	System.out.println(location);
 			Knight.setLocation(location);
 			arrofPoints = Knight.getLocations();
-			System.out.println("LENG2 " + arrofPoints.length);
+		//	System.out.println("LENG2 " + arrofPoints.length);
 		//	System.out.println("Loc1: "+ Knight.getBoard()[0][0]);
 		//	System.out.println("LNG:" +arrofPoints.length);
 			
 		
 		}
-		System.out.println(Knight.getCounter());
+		dPathsCounter=0;
+		System.out.println("Counter: " + Knight.getCounter());
 		numOfTimes++;
 	//System.out.println(Knight.getBoard()[3][5]);
 		
@@ -119,7 +129,7 @@ static void back()
 			//set location to one step before
 			if(board[i][j] == Knight.getCounter())
 			{
-			
+				//STEP BEHIND
 				//System.out.println("RELOCATION!");
 				location.x = i;
 				location.y = j;
@@ -128,7 +138,10 @@ static void back()
 			
 			if(board[i][j] == Knight.getCounter()+1)
 			{
-	
+				//CURRENT STEP
+				deadPaths[dPathsCounter] = new Point();
+				deadPaths[dPathsCounter].x=i;
+				deadPaths[dPathsCounter].y=j;
 				board[i][j] = 0;
 				//System.out.println("SET 0" + i + " , " + j);
 			}
@@ -143,8 +156,18 @@ static void back()
 	Knight.setBoard(board);
 	Knight.setlocation(location);
 	arrofPoints = Knight.getLocations();
+	if(arrofPoints.length > 1)
+	{
+		
+		//Found a sqaure with more than one option
+	
+		
+		/*dPathsCounter++;
+		System.out.println("MORE THAN ONE OPT");*/
+	}
 	if(arrofPoints.length == 1)
 	{
+		//If sqaure that was one step before had only one option go one more step back
 		System.out.println("BACKMORE!");
 		back();
 	}
