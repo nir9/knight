@@ -51,7 +51,13 @@ public class main {
 		//	Knight = new knight(board, location, boardDim);
 			
 			arrofPoints = Knight.getLocations();
-		
+			
+		if(dPathsCounter >= arrofPoints.length)
+		{
+			
+			back();
+			dPathsCounter=0;
+		}
 		//System.out.println("LENG " + arrofPoints.length);
 		while(arrofPoints.length != 0)
 		{
@@ -59,23 +65,21 @@ public class main {
 			randomNum = rnd.nextInt(arrofPoints.length);
 			location.x = arrofPoints[randomNum].x;
 			location.y = arrofPoints[randomNum].y;
-			/*for(int i=0;i<dPathsCounter;i++)
+			for(int i=0;i<dPathsCounter;i++)
 			{
 				if(location.x == deadPaths[i].x&&location.y == deadPaths[i].y)
 				{
 					continue;//If our new location leads to a known dead end the algorithm will start the while again
 				}
-			}*/
+			}
 		//	System.out.println(location);
 			Knight.setLocation(location);
 			arrofPoints = Knight.getLocations();
-		//	System.out.println("LENG2 " + arrofPoints.length);
-		//	System.out.println("Loc1: "+ Knight.getBoard()[0][0]);
-		//	System.out.println("LNG:" +arrofPoints.length);
+		
 			
 		
 		}
-		dPathsCounter=0;
+	
 		System.out.println("Counter: " + Knight.getCounter());
 		numOfTimes++;
 	//System.out.println(Knight.getBoard()[3][5]);
@@ -162,8 +166,8 @@ static void back()
 		//Found a sqaure with more than one option
 	
 		
-		/*dPathsCounter++;
-		System.out.println("MORE THAN ONE OPT");*/
+		dPathsCounter++;
+		//System.out.println("MORE THAN ONE OPT");
 	}
 	if(arrofPoints.length == 1)
 	{
