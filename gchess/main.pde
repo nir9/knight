@@ -16,8 +16,8 @@ PFont f;
         
         Point [] arrofPoints;
         Point boardDim = new Point();
-        boardDim.x = 8;//Can try 5X5 or 8X8 or 6X6....
-        boardDim.y = 8;
+        boardDim.x = 150;//Can try 5X5 or 8X8 or 6X6....
+        boardDim.y = 150;
         Point [] pointsOnBoard = new Point[boardDim.x*boardDim.y]; 
         int[][] board = new int[boardDim.x][boardDim.y];
         Point location = new Point();
@@ -97,7 +97,7 @@ PFont f;
         
         }
         numOfTimes++;
-        if(numOfTimes%1000000 == 0){
+        if(numOfTimes%1 == 0){
           println("# of times: "+ numOfTimes);
         
           elapsedTime = (System.nanoTime() - startTime);
@@ -133,7 +133,7 @@ PFont f;
         for(int c= 1; c<pointsOnBoard.length; c++){
             println("Place #: " + (c+1) + " At Loc: " + pointsOnBoard[c].x + " , " + pointsOnBoard[c].y);
             stroke(157, 204, 241);
-            line(pointsOnBoard[c-1].x*100+1, pointsOnBoard[c-1].y*100+1,pointsOnBoard[c].x*100+1,pointsOnBoard[c].y*100+1);
+            line(pointsOnBoard[c-1].x*(800/boardDim.x)+1, pointsOnBoard[c-1].y*(800/boardDim.y)+1,pointsOnBoard[c].x*(800/boardDim.x)+1,pointsOnBoard[c].y*(800/boardDim.y)+1);
             fill(157, 204, 241); 
             if (c+1 < 50){
               text("Place #: " + (c+1) + " At Loc: " + pointsOnBoard[c].x + " , " + pointsOnBoard[c].y,800,((c+1)*14)+10); 
