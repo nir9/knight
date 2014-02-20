@@ -15,10 +15,20 @@ public class knight {
     location = location1;
     
   }
-  public Point[] getLocations ()
+  public Point[] getLocations (Point loc)
   {
-    Point[] points;
+    Point savedLocation;
+     Point[] points;
     int counter = 0;
+    savedLocation = location;
+    if(loc != null)
+    {
+      //If argument is not null loc that's been sent will be replaced with current loc but will be swaped back
+      
+      location = loc;
+    }
+    
+   
       
       if(!(location.x+2>Dimensions.x-1||location.y+1>Dimensions.y-1)&&_board[location.x+2][location.y+1]==0)
       {
@@ -167,9 +177,9 @@ public class knight {
         points[counter].y= location.y+2;
         counter++;
       }
-      
+      location = savedLocation;
       return points;
-    
+
     
     
   }
@@ -197,6 +207,3 @@ public class knight {
     getLocations
   }*/
 }
-
-  
-
