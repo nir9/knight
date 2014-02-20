@@ -28,6 +28,8 @@ PFont f;
         //picking lowest options spot variables
       //  Point lowPoint;
         int lowLeng = 8;
+        int locCounter=0;
+        Point[] locationOpt = new Point[8]; //if same number of future options than put in array
         
         
         
@@ -42,7 +44,9 @@ PFont f;
             
         while(arrofPoints.length != 0)
         {
-          lowLeng=8;
+          lowLeng=8;//Init lowLeng
+          locCounter=0;
+          //println("INIT");
             //Randomly pick a location from array of Points if two or more places to go have same amount of lowest location options...
           /*  randomNum = rnd.nextInt(arrofPoints.length);
             location.x = arrofPoints[randomNum].x;
@@ -54,10 +58,37 @@ PFont f;
              
                if(Knight.getLocations(arrofPoints[i]).length<lowLeng)
                { 
-                 location = arrofPoints[i];
+                /* locationOpt[locCounter] = arrofPoints[i];
+                  println(locCounter);
+                 locCounter++;*/
+                // location = arrofPoints[i];
                  lowLeng = Knight.getLocations(arrofPoints[i]).length;
+                 
+               }
+           /*    if(Knight.getLocations(arrofPoints[i]).length==lowLeng)
+               {
+                 locationOpt[locCounter] = arrofPoints[i];
+                 println(locCounter);
+                 locCounter++;
+               }*/
+            }
+            
+            
+            for(int i = 0; i<arrofPoints.length; i++)
+            {
+               if(Knight.getLocations(arrofPoints[i]).length==lowLeng)
+               {
+                 locationOpt[locCounter] = arrofPoints[i];
+                 
+                 locCounter++;
+             //    println(locCounter);
                }
             }
+            
+           
+            randomNum = rnd.nextInt(locCounter);
+            println(randomNum);
+            location = locationOpt[randomNum];
             //println("Location Cords: " + location.x + " , " + location.y + " Low Leng: " + lowLeng);
                 Knight.setLocation(location);
             arrofPoints = Knight.getLocations(null);
