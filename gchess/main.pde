@@ -25,7 +25,9 @@ PFont f;
         int randomNum;      
         knight Knight = new knight(board, location , boardDim);
         
-    
+        //picking lowest options spot variables
+      //  Point lowPoint;
+        int lowLeng = 8;
         
         
         
@@ -36,19 +38,30 @@ PFont f;
             
             Knight = new knight(board, location, boardDim);
             Knight.setLocation(location);
-            arrofPoints = Knight.getLocations();
+            arrofPoints = Knight.getLocations(null);
             
         while(arrofPoints.length != 0)
         {
-    
-            randomNum = rnd.nextInt(arrofPoints.length);
+          lowLeng=8;
+            //Randomly pick a location from array of Points if two or more places to go have same amount of lowest location options...
+          /*  randomNum = rnd.nextInt(arrofPoints.length);
             location.x = arrofPoints[randomNum].x;
-            location.y = arrofPoints[randomNum].y;
-        //  println(location);
+            location.y = arrofPoints[randomNum].y;*/
+            // ----
+           
+            for(int i = 0; i<arrofPoints.length; i++)
+            {
+             
+               if(Knight.getLocations(arrofPoints[i]).length<lowLeng)
+               { 
+                 location = arrofPoints[i];
+                 lowLeng = Knight.getLocations(arrofPoints[i]).length;
+               }
+            }
+            //println("Location Cords: " + location.x + " , " + location.y + " Low Leng: " + lowLeng);
                 Knight.setLocation(location);
-            arrofPoints = Knight.getLocations();
-        //  println("Loc1: "+ Knight.getBoard()[0][0]);
-        //  println("LNG:" +arrofPoints.length);
+            arrofPoints = Knight.getLocations(null);
+       
             
         
         }
@@ -109,4 +122,3 @@ PFont f;
         print(elapsedTime/1000000000);
         print(" seconds");
     }
-
